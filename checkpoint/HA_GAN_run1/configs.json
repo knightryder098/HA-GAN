@@ -1,0 +1,18 @@
+{
+  "batch_size": 4,
+  "workers": 8,
+  "img_size": 128,
+  "num_iter": 2000,
+  "log_iter": 20,
+  "continue_iter": 0,
+  "latent_dim": 1024,
+  "g_iter": 1,
+  "lr_g": 0.0001,
+  "lr_d": 0.0004,
+  "lr_e": 0.0001,
+  "data_dir": "Results/",
+  "exp_name": "HA_GAN_run1",
+  "fold": 0,
+  "lambda_class": 0.1,
+  "num_class": 0
+}

@@ -113,13 +113,16 @@ class Discriminator(nn.Module):
         self.sub_D = Sub_Discriminator(num_class)
 
     def forward(self, h, h_small, crop_idx):
+        
         h = F.leaky_relu(self.conv2(h), negative_slope=0.2)
         h = F.leaky_relu(self.conv3(h), negative_slope=0.2)
         h = F.leaky_relu(self.conv4(h), negative_slope=0.2)
         h = F.leaky_relu(self.conv5(h), negative_slope=0.2)
         h = F.leaky_relu(self.conv6(h), negative_slope=0.2)
         h = F.leaky_relu(self.conv7(h), negative_slope=0.2).squeeze()
-        h = torch.cat([h, (crop_idx / 112. * torch.ones((h.size(0), 1))).cuda()], 1) # 128*7/8
+        
+        h = torch.cat([h, (crop_idx / 112. * torch.ones((h.size(0), 1))).cuda()], 1)
+        
         h = F.leaky_relu(self.fc1(h), negative_slope=0.2)
         h_logit = self.fc2(h)
         if self.num_class>0:

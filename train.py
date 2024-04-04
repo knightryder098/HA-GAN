@@ -32,9 +32,9 @@ parser.add_argument('--batch-size', default=4, type=int,
                          'batch size of all GPUs')
 parser.add_argument('--workers', default=8, type=int,
                     help='number of data loading workers (default: 8)')
-parser.add_argument('--img-size', default=256, type=int,
+parser.add_argument('--img-size', default=128, type=int,
                     help='size of training images (default: 256, can be 128 or 256)')
-parser.add_argument('--num-iter', default=80000, type=int,
+parser.add_argument('--num-iter', default=2000, type=int,
                     help='number of iteration for training (default: 80000)')
 parser.add_argument('--log-iter', default=20, type=int,
                     help='number of iteration between logging (default: 20)')
@@ -304,7 +304,7 @@ def main():
             fig=plt.figure()
             plotting.plot_img(featmask,title="REC",cut_coords=(args.img_size//2,args.img_size//2,args.img_size//16),figure=fig,draw_cross=False,cmap="gray")
             summary_writer.add_figure('Rec', fig, iteration, close=True)
-            
+           
             featmask = np.squeeze((0.5*fake_images[0]+0.5).data.cpu().numpy())
             featmask = nib.Nifti1Image(featmask.transpose((2,1,0)),affine = np.eye(4))
             fig=plt.figure()
